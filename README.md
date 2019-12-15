@@ -1,1 +1,1 @@
-template_git
+templates_git

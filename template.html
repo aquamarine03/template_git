@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Jqueryの読み込み -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <!-- font awesomeの読み込み -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"/>
+    <!-- Google fontsの読みこみ -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Arapey|Mansalva|Nothing+You+Could+Do|Noto+Serif+JP|Shadows+Into+Light|Ubuntu&display=swap"
+    rel="stylesheet">
+ 
+  <title>Document</title>
+  </head>
+  <body>
+    <!-- google fonts -->
+    <p style="font-family: 'Mansalva', cursive;">hacker's bar</p>
+    <p style="font-family: 'Nothing You Could Do', cursive;">hacker's bar</p>
+    <p style="font-family: 'Shadows Into Light', cursive;">hacker's bar</p>
+    <p style="font-family: 'Arapey', serif;">hacker's bar</p>
+    <p style="font-family: 'Noto Serif JP',serif;">ハッカーズバー</p>
+    <p style="font-family: 'Ubuntu', sans-serif;">hacker's bar</p>
+
+
+    <!-- checkboxを入れるとボタンが有効化する -->
+    <h1>checkboxを入れるとボタンが有効化する</h1>
+
+    <input id="AgreeBtn" type="checkbox" />同意する
+    <input id="SubmitBtn" type="submit" disabled />
+
+    <script>
+      $("#AgreeBtn").on("change", function() {
+        if ($(this).prop("checked")) {
+          $("#SubmitBtn").prop("disabled", false);
+        } else {
+          $("#SubmitBtn").prop("disabled", true);
+        }
+      });
+    </script>
+
+    <!-- ボタンを押すとコメントが出たり隠れたりする -->
+    <h1>ボタンを押すとコメントが出たり隠れたりする</h1>
+    <input
+      type="button"
+      value="コンテンツが出たり隠れたりします"
+      id="contentsbtn"
+    />
+    <p id="contents" class="off">コンテンツです</p>
+
+    <script>
+      $("#contentsbtn").on("click", function() {
+        $("#contents").toggleClass("off");
+      });
+    </script>
+
+    <style>
+      .off {
+        display: none;
+      }
+    </style>
+
+    <!-- selectで選択したもので表示を変える -->
+    <h1>selectで選択したもので表示を変える</h1>
+    <form method="post" action="#">
+      <select id="myselectbox">
+        <option value="東京">東京</option>
+        <option value="神奈川" selected>神奈川</option>
+        <option value="千葉">千葉</option>
+      </select>
+      <p id="target"></p>
+    </form>
+
+    <script>
+      $("#myselectbox").on("change", function() {
+        if ($("#myselectbox").val() === "東京") {
+          $("#target").text("東京を選択しました");
+        } else if ($("#myselectbox").val() === "神奈川") {
+          $("#target").text("神奈川を選択しました");
+        } else {
+          $("#target").text("千葉を選択しました");
+        }
+      });
+    </script>
+
+    <!-- 入力欄に何か入っていれば表示！ -->
+    <h1>入力欄に何か入っていれば表示！</h1>
+    <form>
+      <input type="text" id="name" placeholder="name" />
+    </form>
+    <p id="naiyou" style="display:none;">入力欄に何か入っていれば表示！</p>
+
+    <script>
+      $("#name").on("change", function() {
+        $("#naiyou").css("display", "block");
+      });
+    </script>
+
+    <!-- ラジオボックスの表示をボタンにする -->
+    <h1>ラジオボックスの表示をボタンにする</h1>
+    <form>
+      <input type="radio" name="pref" value="tokyo" id="東京" /><label
+        for="東京"
+        class="label"
+        >東京</label
+      >
+      <input type="radio" name="pref" value="神奈川" id="神奈川" /><label
+        for="神奈川"
+        class="label"
+        >神奈川</label
+      >
+      <input type="radio" name="pref" value="埼玉" id="埼玉" /><label
+        for="埼玉"
+        class="label"
+        >埼玉</label
+      >
+    </form>
+
+    <style>
+      input[type="radio"] {
+      display: none;
+      }
+
+      .label {
+        display: block;
+        float: left;
+        margin: 5px;
+        width: 60px;
+        height: 40px;
+        padding-left: 5px;
+        padding-right: 5px;
+        color: #dd4813;
+        text-align: center;
+        line-height: 40px;
+        cursor: pointer;
+        border: 1px solid #dd4813;
+        border-radius: 16%;
+        transition: 0.3s;
+      }
+
+      .label:hover {
+        background-color: #bebebe;
+      }
+
+
+      input[type="radio"]:checked + label {
+        background: #dd4813;
+        color: #ffffff;
+      }
+    </style>
+
+    <!-- トップに戻るボタン (拡大表示してスクロールすると表示されます-->
+    <h1>トップに戻るボタン</h1>
+    <p class="pagetop">
+      <a href="#wrap"><i class="fas fa-chevron-circle-up"></i></a>
+    </p>
+
+    <script>
+      $(document).ready(function() {
+        var pagetop = $(".pagetop");
+        $(window).scroll(function() {
+          if ($(this).scrollTop() > 100) {
+            pagetop.fadeIn();
+          } else {
+            pagetop.fadeOut();
+          }
+        });
+        pagetop.click(function() {
+          $("body, html").animate({ scrollTop: 0 }, 500);
+          return false;
+        });
+      });
+    </script>
+
+    <style>
+      /* トップに戻るボタン */
+      .pagetop {
+        display: none;
+        position: fixed;
+        bottom: 10px;
+        right: 15px;
+      }
+      .pagetop a {
+        display: block;
+        background-color: #ccc;
+        text-align: center;
+        color: #222;
+        font-size: 12px;
+        text-decoration: none;
+        padding: 5px 10px;
+        filter: alpha(opacity=50);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+      }
+      .pagetop a:hover {
+        display: block;
+        background-color: #b2d1fb;
+        text-align: center;
+        color: #fff;
+        font-size: 12px;
+        text-decoration: none;
+        padding: 5px 10px;
+        filter: alpha(opacity=50);
+        -moz-opacity: 0.5;
+        opacity: 0.5;
+      }
+
+      .pagetop i {
+        font-size: 30px;
+      }
+    </style>
+
+    <!-- モーダル -->
+    <br />
+    <h1 style="display:block;">モーダル</h1>
+    <button id="open">OPEN!</button>
+    <!-- モーダルウィンドウ -->
+    <div id="modal">
+      <p>ここにコンテンツが入ります。</p>
+      <p>ここにコンテンツが入ります。</p>
+      <p>ここにコンテンツが入ります。</p>
+      <div><button id="close">CLOSE</button></div>
+    </div>
+
+    <!-- オーバーレイ -->
+    <div id="overlay"></div>
+
+    <script>
+      $(document).ready(function() {
+        $("#open").on("click", function(e) {
+          e.preventDefault();
+          $("#overlay,#modal").addClass("active");
+          $("#close, #overlay").on("click", function() {
+            $("#overlay, #modal").removeClass("active");
+            return false;
+          });
+        });
+      });
+    </script>
+
+    <style>
+      #overlay {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9;
+        background-color: rgba(0, 0, 0, 0.65);
+      }
+      #modal {
+        opacity: 0;
+        transition: 0.7s;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        z-index: 99;
+        transform: translate(-50%, -50%);
+        max-width: 70vw;
+        max-height: 70vh;
+        box-sizing: border-box;
+        padding: 32px;
+        border-radius: 8px;
+        background-color: #fff;
+      }
+      #modal.active {
+        opacity: 1 !important ;
+      }
+      .active {
+        display: block !important;
+      }
+      #close {
+        text-align: right;
+      }
+      #modal-title {
+        font-size: 24px;
+        font-family: "Yu Gothic", sans-serif;
+      }
+      .message {
+        font-size: 16px;
+        margin-bottom: 30px;
+        font-weight: bold;
+        font-family: "Noto Serif JP", serif;
+      }
+    </style>
+
+    <!-- 時間を取得 -->
+    <h1>時間を表示する</h1>
+    <p>現在の時刻</p>
+    <div id="datetime"></div>
+
+    <script>
+      //時間を取得する関数
+    function showtime(){
+  var date = new Date();
+    let weekday = ['日','月','火','水','木','金','土'];
+    let month = date.getMonth() + 1 ;
+    $('#datetime').html(month + "月"+ date.getDate() + "日（" + weekday[date.getDay()] +"） " +date.getHours() + ":" + ('0'+date.getMinutes()).slice(-2) + ":" + ('0' +date.getSeconds()).slice(-2));
+  }
+  // showtimeの()はつけない
+  setInterval(showtime,1000);
+  </script>
+  </script>
+
+<!-- ボタンデザイン モーダルの#open,#closeに当てています-->
+<style>
+
+  #close,#open{
+    color: #fff;
+  background-color: #bebebe;
+  border-radius: 8px;
+  display: inline-block;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  transition: all 0.5s;
+  font-family: "Merriweather", serif;
+  width: 70px;
+  height: 30px;
+  font-size: 16px;
+}
+
+#close:hover,#open:hover {
+background-color: white;
+border: 1px solid #bebebe;
+color: #bebebe;
+}
+
+h1{
+  font-size: 16px;
+}
+</style>
+
+<!-- タブで切り替える -->
+<h1>タブ切り替え</h1>
+<ul class="tab">
+  <li class="on">お知らせ</li>
+  <li>ニュース</li>
+</ul>
+<div class="announceNews">
+  <ul>
+    <li><a href="">20160909 お知らせを更新しました</a></li>
+    <li><a href="">20160909 お知らせを更新しました</a></li>
+  </ul>
+  <ul style="display:none;">
+    <li><a href="">20160909 ニュースを更新しました</a></li>
+    <li><a href="">20160909 ニュースを更新しました</a></li>
+  </ul>
+</div>
+<script>
+  $(function () {
+    $('.tab li').click(function () {
+      var index = $('.tab li').index(this);//ここでクリックされたのは何番目かということを取得し、indexに変数として格納する
+      $('.announceNews>ul').css('display', 'none');//まず消す。基本的にはdisplay:none;をつける
+      $('.announceNews>ul').eq(index).css('display', 'block');//indexに格納された番号番目に対してdisplay:block;を付ける
+      $('.tab li').removeClass('on');//まず.onを消す
+      $(this).addClass('on')//クリックした方に.onを付与する
+    });
+  });
+</script>
+
+<style>
+  .tab{
+    display: flex;
+    justify-content: space-around;
+  }
+  .tab li.on {
+    color: #ff396e;
+    border-bottom: 4px solid #ff396e;
+    background: #f8f8f8;
+  }
+
+  .announceNews li {
+    height: 50px;
+    padding: 13px 0 0 10px;
+    background: white;
+  }
+
+  .announceNews li:nth-child(even) {
+    background: #f8f8f8;}
+
+</style>
+
+<h1>ログインフォーム</h1>
+<html>
+
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <title>Sign in</title>
+</head>
+
+<body>
+  <div class="main">
+    <p class="sign" align="center">Sign in</p>
+    <form class="form1">
+      <input class="un" type="text" align="center" placeholder="Username">
+      <input class="pass" type="password" align="center" placeholder="Password">
+      <a class="submit" align="center">Sign in</a>
+      <p class="forgot" align="center"><a href="#">Forgot Password?</p>
+  </div>
+
+  <div>
+    <p>配列の練習</p>
+    <h2>普通の配列</h2>
+    <div id="array"></div>
+    <h2>連想配列</h2>
+    <div id="array2"></div>
+    <h2>多次元配列（配列の中に配列）</h2>
+    <div id="array3"></div>
+  </div>
+    <script>
+    // 普通の配列
+    let view ="";
+    let array = ["banana","melon","apple"];
+    for(let i=0; i<array.length; i++){
+      view = "<p>私は" + array[i] + "が好きです" +'<br>'+'</p>';
+      $("#array").append(view);
+    }
+
+    // 連想配列（順番を指定（順序の概念がない）できないので、keyで指定）
+    // 全て取り出したいときのfor文は、いつものではなく、for(key in array)
+    // 全てのオブジェクトは連想配列である。
+    let array2 ={vegetable:"人参",fruits:"りんご",sweets:"ケーキ"};
+    $("#array2").append(array2["vegetable"]);
+    let view2 ="";
+    for(key in array2){
+      view2+="<p>私は"+key+"の中では"+array2[key]+"が好きです</p>"
+    }
+    $("#array2").append(view2);
+
+    // 多次元配列（配列の中に配列）
+    let array3 =[ 
+    ["fruits",{黄色:"バナナ",赤:"りんご",緑:"メロン"}],
+    ["vegetable",{carrot:"人参",tomato:"トマト"}]
+    ];
+    let view3 ="";
+    let array4 = array3[0][1];
+    for(key in array4){
+      view3 += "<p>私は" + key +"の中では"+array4[key] + "が好きです</p>";
+    }
+    $("#array3").append(view3);
+    $("#array3").append(array3[1][1]["tomato"]);
+
+    
+
+  // stringメソッド（もし一つしか渡してない場合は、開始位置となり開始位置以降のものを全てぬき出す。）
+    var str = 'イチゴメロンバナナ';
+    var result = str.substring(6);
+    // sliceメソッドも同じ（ただ第二引数で-を取れる。−２なら、最後の２文字から全部を抜き出す。）
+    var result2 = str.slice(6);
+    console.log(result); //バナナ
+    console.log(result2); //バナナ
+    // ３番目の文字から６番目（終了位置）の前まで（要注意）をとる。
+    result = str.substring(3,6);
+    console.log(result); //メロン
+
+    // substrメソッドは、第二引数で引き出す文字数を指定する。
+    let result3 = str.substr(3,3);
+    console.log(result3);//メロン
+    </script> 
+
+
+  <style>
+    body {
+    background-color: #F3EBF6;
+    font-family: 'Ubuntu', sans-serif;
+    }
+    
+    .main {
+    background-color: #FFFFFF;
+    width: 400px;
+    height: 400px;
+    margin: 7em auto;
+    border-radius: 1.5em;
+    box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    }
+    
+    .sign {
+    padding-top: 40px;
+    color: #8C55AA;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 23px;
+    }
+    
+    .un {
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+    }
+    
+    form.form1 {
+    padding-top: 40px;
+    }
+    
+    .pass {
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+    }
+    
+    
+    .un:focus, .pass:focus {
+    border: 2px solid rgba(0, 0, 0, 0.18) !important;
+    
+    }
+    
+    .submit {
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: linear-gradient(to right, #9C27B0, #E040FB);
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    margin-left: 35%;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+    }
+    
+    .forgot {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #E1BEE7;
+    padding-top: 15px;
+    }
+    
+    a {
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #E1BEE7;
+    text-decoration: none
+    }
+    
+    @media (max-width: 600px) {
+    .main {
+    border-radius: 0px;
+    }
+  </style>
+
+</body>
+
+</html>
+
+
+
+  </body>
+</html>
